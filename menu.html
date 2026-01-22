@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Tamarind Tree — Menu</title>
+  <style>
+    /* === DESIGN SPECS (for reference only) ===
+    Section Header EN: Montserrat Bold / Open Sans Bold, 16-18pt, #2C3E50, UPPERCASE, center
+    Translations: Noto Sans, 9-10pt, #7F8C8D, center
+    Item Name EN: Sans-serif Bold, 11-12pt, #2C3E50
+    Translations (KR/VN/CN/RU): 8-9pt, #5D6D7E
+    Price: Sans-serif Bold, 11-12pt, #E67E22
+    Photo: max-width: 100%, margin: 0 auto, display: block
+    */
+    body {
+      font-family: "Open Sans", sans-serif;
+      line-height: 1.4;
+      color: #2C3E50;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .section-title-en {
+      font-weight: bold;
+      font-size: 18pt;
+      color: #2C3E50;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .section-translations {
+      font-size: 10pt;
+      color: #7F8C8D;
+      margin: 4px 0 0;
+    }
+    .item {
+      display: flex;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+    .item-photo {
+      flex: 0 0 120px;
+      margin-right: 16px;
+    }
+    .item-photo img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+    .item-content {
+      flex: 1;
+    }
+    .item-name-en {
+      font-weight: bold;
+      font-size: 12pt;
+      margin: 0 0 4px;
+      color: #2C3E50;
+    }
+    .item-translations {
+      font-size: 9pt;
+      color: #5D6D7E;
+      margin: 0 0 4px;
+    }
+    .item-price {
+      font-weight: bold;
+      font-size: 12pt;
+      color: #E67E22;
+      margin: 0;
+    }
+    .badge {
+      font-size: 10pt;
+      color: #E67E22;
+    }
+    .note {
+      font-size: 9pt;
+      color: #7F8C8D;
+      margin-top: 8px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- RESTAURANT HEADER -->
+  <div class="restaurant-header" style="text-align: center; margin-bottom: 30px;">
+    <h1 style="font-size: 24pt; color: #2C3E50;">The Tamarind Tree</h1>
+    <p style="color: #7F8C8D;">Da Nang, Vietnam</p>
+  </div>
+
+  <!-- SECTION 1: STARTERS -->
+  <section class="section" id="1-starters">
+    <div class="section-header">
+      <h2 class="section-title-en">Starters</h2>
+      <div class="section-translations">스타터 / KHAI VỊ / 开胃菜 / ЗАКУСКИ</div>
+    </div>
+
+    <!-- Each starter has unique photo -->
+    <article class="item">
+      <div class="item-photo"><img src="img/fresh-rice-paper-rolls.jpg" alt="Fresh Rice Paper Rolls"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">FRESH RICE PAPER ROLLS</h3>
+        <div class="item-translations">신선한 라이스 페이퍼 롤 / Gỏi Cuốn<br>新鲜米纸卷 / Роллы в рисовой бумаге</div>
+        <p class="item-price">70₫</p>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="item-photo"><img src="img/fresh-rice-paper-rolls-shrimp.jpg" alt="Fresh Rice Paper Rolls with Shrimp"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">FRESH RICE PAPER ROLLS WITH SHRIMP</h3>
+        <div class="item-translations">새우를 곁들인 신선한 라이스 페이퍼 롤 / Gỏi Cuốn Tôm<br>鲜虾米纸卷 / Роллы с креветками</div>
+        <p class="item-price">75₫</p>
+      </div>
+    </article>
+
+    <!-- ... repeat for other starters with unique photos ... -->
+
+  </section>
+
+  <!-- SECTION 4: BÁNH MÌ & LIGHT MEALS (GROUP PHOTO) -->
+  <section class="section" id="4-banh-mi--light-meals">
+    <div class="section-header">
+      <h2 class="section-title-en">Bánh Mì & Light Meals</h2>
+      <div class="section-translations">반미 & 라이트 밀 / BÁNH MÌ & MÓN NHẸ / 法棍 & 轻食 / БАГЕТЫ И ЛЕГКИЕ БЛЮДА</div>
+    </div>
+
+    <!-- All use SAME photo: banh-mi-group.jpg -->
+    <article class="item">
+      <div class="item-photo"><img src="img/banh-mi-group.jpg" alt="Bánh Mì assortment"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">PORK BÁNH MÌ</h3>
+        <div class="item-translations">돼지고기 반미 / Bánh Mì Thịt Lợn<br>猪肉法棍 / Багет со свининой</div>
+        <p class="item-price">30₫</p>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="item-photo"><img src="img/banh-mi-group.jpg" alt="Bánh Mì assortment"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">CHICKEN BÁNH MÌ</h3>
+        <div class="item-translations">닭고기 반미 / Bánh Mì Thịt Gà<br>鸡肉法棍 / Багет с курицей</div>
+        <p class="item-price">30₫</p>
+      </div>
+    </article>
+
+    <!-- ... same photo for Seafood Bread and Egg Bánh Mì ... -->
+
+  </section>
+
+  <!-- SECTION 7: RICE & NOODLES -->
+  <section class="section" id="7-rice--noodles">
+    <div class="section-header">
+      <h2 class="section-title-en">Rice & Noodles</h2>
+      <div class="section-translations">라이스 & 누들 / CƠM & MÌ / 米饭 & 面条 / РИС И ЛАПША</div>
+    </div>
+
+    <!-- FRIED RICE GROUP (1 photo) -->
+    <article class="item">
+      <div class="item-photo"><img src="img/fried-rice-group.jpg" alt="Fried Rice assortment"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">FRIED RICE WITH SEAFOOD</h3>
+        <div class="item-translations">해산물 볶음밥 / Cơm Chiên Hải Sản<br>海鲜炒饭 / Рис с морепродуктами</div>
+        <p class="item-price">115₫</p>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="item-photo"><img src="img/fried-rice-group.jpg" alt="Fried Rice assortment"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">FRIED RICE WITH BEEF</h3>
+        <div class="item-translations">쇠고기 볶음밥 / Cơm Chiên Bò<br>牛肉炒饭 / Рис с говядиной</div>
+        <p class="item-price">80₫</p>
+      </div>
+    </article>
+
+    <!-- ... repeat for other fried rice items ... -->
+
+    <!-- NOODLES GROUP (1 photo) -->
+    <article class="item">
+      <div class="item-photo"><img src="img/noodles-group.jpg" alt="Noodles stir-fry"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">NOODLES WITH SEAFOOD AND VEGETABLES</h3>
+        <div class="item-translations">해산물과 야채를 곁들인 국수 / Mì Xào Hải Sản<br>海鲜蔬菜面 / Лапша с морепродуктами</div>
+        <p class="item-price">115₫</p>
+      </div>
+    </article>
+
+    <!-- ... repeat for other noodle items with same photo ... -->
+
+  </section>
+
+  <!-- SECTION 5: SIGNATURE MAINS -->
+  <section class="section" id="5-signature-mains">
+    <div class="section-header">
+      <h2 class="section-title-en">Signature Mains ⭐</h2>
+      <div class="section-translations">시그니처 메인 / MÓN CHÍNH ĐẶC BIỆT / 招牌主菜 / ОСНОВНЫЕ БЛЮДА</div>
+    </div>
+
+    <!-- Example: Grilled Fish in Banana Leaves (unique photo) -->
+    <article class="item">
+      <div class="item-photo"><img src="img/grilled-fish-banana-leaf.jpg" alt="Grilled Fish in Banana Leaves"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">GRILLED FISH IN BANANA LEAVES</h3>
+        <div class="item-translations">바나나 잎을 곁들인 생선 구이 / Cá Nướng Lá Chuối<br>香蕉叶烤鱼 / Рыба гриль в банановых листьях</div>
+        <p class="item-price">185₫</p>
+        <span class="badge">⭐ Signature Dish</span>
+      </div>
+    </article>
+
+    <!-- Curry Chicken group -->
+    <article class="item">
+      <div class="item-photo"><img src="img/curry-chicken-group.jpg" alt="Curry dishes (chicken/pork/tofu)"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">CURRY CHICKEN</h3>
+        <div class="item-translations">카레 치킨 / Cà Ri Gà<br>咖喱鸡 / Курица карри</div>
+        <p class="item-price">85₫</p>
+      </div>
+    </article>
+
+    <!-- ... Curry Pork and Curry Tofu use same curry-chicken-group.jpg ... -->
+
+    <!-- Curry Seafood uses different photo -->
+    <article class="item">
+      <div class="item-photo"><img src="img/curry-seafood.jpg" alt="Curry Seafood"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">CURRY SEAFOOD</h3>
+        <div class="item-translations">카레 해산물 / Cà Ri Hải Sản<br>咖喱海鲜 / Морепродукты карри</div>
+        <p class="item-price">105₫</p>
+      </div>
+    </article>
+
+    <p class="note">All curry dishes served with rice or bread<br>
+      모든 카레 요리는 밥 또는 빵과 함께 제공됩니다 / Tất cả cà ri phục vụ với cơm hoặc bánh mì<br>
+      所有咖喱配米饭或面包 / Все карри подаются с рисом или хлебом</p>
+  </section>
+
+  <!-- SECTION 6: PLANT-BASED -->
+  <section class="section" id="6-plant-based">
+    <div class="section-header">
+      <h2 class="section-title-en">Plant-Based 🌱</h2>
+      <div class="section-translations">플랜트 베이스 / MÓN CHAY / 素食 / ВЕГЕТАРИАНСКОЕ</div>
+    </div>
+
+    <!-- Crispy Tofu -->
+    <article class="item">
+      <div class="item-photo"><img src="img/tofu-crispy.jpg" alt="Crispy Tofu"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">CRISPY TOFU</h3>
+        <div class="item-translations">바삭한 두부 / Đậu Khuôn Xủ<br>香脆豆腐 / Хрустящий тофу</div>
+        <p class="item-price">70₫</p>
+      </div>
+    </article>
+
+    <!-- Tofu with sauces (same photo for both) -->
+    <article class="item">
+      <div class="item-photo"><img src="img/tofu-sauce.jpg" alt="Tofu in sauce"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">TOFU WITH TAMARIND SAUCE</h3>
+        <div class="item-translations">타마린드 소스를 곁들인 두부 / Đậu Khuôn Me<br>罗望子豆腐 / Тофу с тамариндом</div>
+        <p class="item-price">65₫</p>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="item-photo"><img src="img/tofu-sauce.jpg" alt="Tofu in sauce"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">TOFU WITH TOMATO & ONION SAUCE</h3>
+        <div class="item-translations">토마토와 양파 소스를 곁들인 두부 / Đậu Khuôn Cà Chua<br>番茄洋葱豆腐 / Тофу с томатами</div>
+        <p class="item-price">65₫</p>
+      </div>
+    </article>
+
+    <!-- Vegetables group -->
+    <article class="item">
+      <div class="item-photo"><img src="img/vegetables-stir-fry.jpg" alt="Stir-fried vegetables"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">STIR FRIED MIX VEGETABLES</h3>
+        <div class="item-translations">믹스 야채 볶음 / Rau Xào<br>炒什锦蔬菜 / Овощи жареные</div>
+        <p class="item-price">65₫</p>
+      </div>
+    </article>
+
+    <!-- ... other veg dishes use same photo ... -->
+
+  </section>
+
+  <!-- SECTION 8: DESSERTS -->
+  <section class="section" id="8-desserts">
+    <div class="section-header">
+      <h2 class="section-title-en">Desserts</h2>
+      <div class="section-translations">디저트 / MÓN TRÁNG MIỆNG / 甜点 / ДЕСЕРТЫ</div>
+    </div>
+
+    <article class="item">
+      <div class="item-photo"><img src="img/pancakes-assortment.jpg" alt="Pancakes (banana, mango, chocolate)"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">BANANA PANCAKE</h3>
+        <div class="item-translations">바나나 팬케이크 / Bánh Kép Chuối<br>香蕉煎饼 / Блинчик с бананом</div>
+        <p class="item-price">55₫</p>
+      </div>
+    </article>
+
+    <!-- ... Mango & Chocolate Pancake use same photo ... -->
+
+  </section>
+
+  <!-- SECTION 9: COFFEE -->
+  <section class="section" id="9-coffee">
+    <div class="section-header">
+      <h2 class="section-title-en">Coffee</h2>
+      <div class="section-translations">커피 / CÀ PHÊ / 咖啡 / КОФЕ</div>
+    </div>
+
+    <!-- Group 1: Vietnamese Coffee -->
+    <article class="item">
+      <div class="item-photo"><img src="img/vietnamese-coffee.jpg" alt="Vietnamese coffee (black & milk)"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">VIETNAMESE COFFEE (BLACK) HOT / COLD</h3>
+        <div class="item-translations">베트남 블랙 커피 (핫/콜드) / Cà Phê Đen (Nóng/Lạnh)<br>越南黑咖啡（热/冰）/ Вьетнамский кофе черный</div>
+        <p class="item-price">30₫</p>
+      </div>
+    </article>
+
+    <!-- Group 2: Specialty Coffee -->
+    <article class="item">
+      <div class="item-photo"><img src="img/specialty-coffee.jpg" alt="Specialty coffee (cappuccino, coconut, salt)"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">CAPPUCCINO</h3>
+        <div class="item-translations">카푸치노 / Cappuccino<br>卡布奇诺 / Капучино</div>
+        <p class="item-price">45₫</p>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="item-photo"><img src="img/specialty-coffee.jpg" alt="Specialty coffee (cappuccino, coconut, salt)"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">COCONUT COFFEE</h3>
+        <div class="item-translations">코코넛 커피 / Cà Phê Dừa<br>椰子咖啡 / Кофе кокосовый</div>
+        <p class="item-price">45₫</p>
+        <span class="badge">📸 Instagram Favorite</span>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="item-photo"><img src="img/specialty-coffee.jpg" alt="Specialty coffee (cappuccino, coconut, salt)"></div>
+      <div class="item-content">
+        <h3 class="item-name-en">COFFEE SALT</h3>
+        <div class="item-translations">커피 솔트 / Cà Phê Muối<br>盐咖啡 / Кофе соленый</div>
+        <p class="item-price">40₫</p>
+        <span class="badge">⭐ Local Specialty</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- Add other sections similarly: Salads, Soups, Juices, Drinks... -->
+
+</body>
+</html>
