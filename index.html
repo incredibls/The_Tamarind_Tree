@@ -5,363 +5,1180 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Tamarind Tree — Menu</title>
   <style>
-    /* === DESIGN SPECS (for reference only) ===
-    Section Header EN: Montserrat Bold / Open Sans Bold, 16-18pt, #2C3E50, UPPERCASE, center
-    Translations: Noto Sans, 9-10pt, #7F8C8D, center
-    Item Name EN: Sans-serif Bold, 11-12pt, #2C3E50
-    Translations (KR/VN/CN/RU): 8-9pt, #5D6D7E
-    Price: Sans-serif Bold, 11-12pt, #E67E22
-    Photo: max-width: 100%, margin: 0 auto, display: block
-    */
+    html, body { 
+      margin: 0; 
+      padding: 0; 
+      font-family: "Open Sans", sans-serif; 
+      height: 100%; 
+      overflow-x: hidden;
+    }
+    
     body {
-      font-family: "Open Sans", sans-serif;
-      line-height: 1.4;
-      color: #2C3E50;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      color: #5D4037;
+      background-color: #f0f0f0;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
     }
-    .section {
-      margin-bottom: 40px;
+    
+    /* Page Container */
+    .page {
+      width: 210mm;
+      height: 100vh;
+      margin: 0 auto 20px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: relative;
+      scroll-snap-align: start;
+      page-break-after: always;
+      box-sizing: border-box;
+      border-bottom: 2px solid #f0f0f0;
     }
+    
+    /* Page Content */
+    .content {
+      width: 210mm;
+      height: 100vh;
+      padding: 25px 40px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    /* Section Headers */
     .section-header {
       text-align: center;
       margin-bottom: 12px;
+      padding-bottom: 3px;
+      border-bottom: 1px solid rgba(93, 64, 55, 0.3);
+      flex-shrink: 0;
     }
-    .section-title-en {
-      font-weight: bold;
+    
+    .section-title-en { 
       font-size: 18pt;
-      color: #2C3E50;
+      font-weight: 700;
+      color: #5D4037;
+      margin: 0 0 3px;
       text-transform: uppercase;
-      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 0.5px 0.5px 1px rgba(255,255,255,0.5);
     }
+    
     .section-translations {
-      font-size: 10pt;
-      color: #7F8C8D;
-      margin: 4px 0 0;
+      font-size: 8pt;
+      color: #6D4C41;
+      text-shadow: 0.5px 0.5px 1px rgba(255,255,255,0.5);
+      text-align: center;
     }
-    .item {
+    
+    /* Dish List */
+    .dishes-container {
+      flex: 1;
       display: flex;
-      margin-bottom: 20px;
-      align-items: flex-start;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+      max-height: calc(100vh - 100px);
     }
-    .item-photo {
-      flex: 0 0 120px;
-      margin-right: 16px;
+
+    /* Dish Card */
+    .dish {
+      display: flex;
+      background: rgba(255,255,255,0.85);
+      border-radius: 6px;
+      padding: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      align-items: center;
+      min-height: 55px;
+      width: 85%;
+      max-width: 350px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
-    .item-photo img {
-      width: 100%;
-      height: auto;
+    
+    .dish-photo {
+      width: 65px;
+      height: 45px;
+      object-fit: cover;
       border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+    
+    .dish-photo img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
-    .item-content {
+    
+    .dish-content {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 45px;
     }
-    .item-name-en {
-      font-weight: bold;
-      font-size: 12pt;
-      margin: 0 0 4px;
-      color: #2C3E50;
+    
+    .dish-name {
+      font-size: 11pt;
+      font-weight: 600;
+      color: #5D4037;
+      text-transform: uppercase;
+      margin-bottom: 1px;
+      text-shadow: 0.5px 0.5px 1px rgba(255,255,255,0.5);
+      line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-    .item-translations {
-      font-size: 9pt;
-      color: #5D6D7E;
-      margin: 0 0 4px;
+
+    .dish-translations {
+      font-size: 5pt;
+      color: #6D4C41;
+      text-shadow: 0.5px 0.5px 1px rgba(255,255,255,0.5);
+      line-height: 1.1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-    .item-price {
-      font-weight: bold;
-      font-size: 12pt;
+
+    .price {
+      font-size: 11pt;
+      font-weight: 600;
       color: #E67E22;
-      margin: 0;
+      align-self: flex-start;
+      margin-top: 1px;
     }
-    .badge {
-      font-size: 10pt;
-      color: #E67E22;
+
+    .page-number {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 11pt;
+      color: #6D4C41;
+      font-weight: 700;
+      opacity: 0.15;
+      transform: translate(-50%, -50%);
+      text-transform: rotate(-5deg);
+      pointer-events: none;
+      letter-spacing: 2px;
     }
-    .note {
-      font-size: 9pt;
-      color: #7F8C8D;
-      margin-top: 8px;
-      font-style: italic;
+
+    @media (max-width: 767px) {
+      .page {
+        width: 100vw;
+        height: 100vh;
+        margin: 0 auto 15px auto;
+      }
+      .content {
+        padding: 20px 15px;
+      }
+      .dishes-container {
+        max-height: calc(100vh - 80px);
+      }
+      .dish {
+        padding: 5px;
+        min-height: 45px;
+        width: 90%;
+        max-width: 300px;
+      }
+      .dish-photo {
+        width: 55px;
+        height: 40px;
+        margin-right: 6px;
+      }
+      .dish-content {
+        min-height: 40px;
+      }
+      .dish-name {
+        font-size: 10pt;
+      }
+      .dish-translations {
+        font-size: 4pt;
+      }
+      .price {
+        font-size: 10pt;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        background-image: none !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+        color: #5D4037;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+      }
+
+      .page {
+        margin: 0 auto 10px auto;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        page-break-after: always;
+        height: 297mm;
+      }
+      .content {
+        padding: 25px 30px;
+      }
+      .dishes-container {
+        overflow: visible;
+        max-height: none;
+      }
+      .dish {
+        width: 90%;
+        max-width: 320px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- RESTAURANT HEADER -->
-  <div class="restaurant-header" style="text-align: center; margin-bottom: 30px;">
-    <h1 style="font-size: 24pt; color: #2C3E50;">The Tamarind Tree</h1>
-    <p style="color: #7F8C8D;">Da Nang, Vietnam</p>
+<!-- PAGE 0: EMPTY PAGE WITH ZERO BACKING -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_000.webp');">
+</div>
+
+<!-- PAGE 1: STARTERS (moved from page 2) -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_001.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 1</div>
+    <div class="section-header">
+      <div class="section-title-en">Starters</div>
+      <div class="section-translations">스타터 / Khai Vị / 开胃菜 / Закуски</div>
+    </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Fresh Rice Paper Rolls"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRESH RICE PAPER ROLLS</div>
+          <div class="dish-translations">신선한 라이스 페이퍼 롤 / Gỏi Cuốn / 新鮮米纸卷 / Роллы в рисовой бумаге</div>
+          <div class="price">70₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls-shrimp.jpg" alt="Fresh Rice Paper Rolls with Shrimp"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRESH RICE PAPER ROLLS WITH SHRIMP</div>
+          <div class="dish-translations">새우를 곁들인 신선한 라이스 페이퍼 롤 / Gỏi Cuốn Tôm / 鲜虾米纸卷 / Роллы с креветками</div>
+          <div class="price">75₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-fish-banana-leaf.jpg" alt="Fried Spring Rolls"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRIED SPRING ROLLS</div>
+          <div class="dish-translations">튀긴 스프링롤 / Chả Giò / 炸春卷 / Жареные спринг-роллы</div>
+          <div class="price">80₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Crispy Squid"></div>
+        <div class="dish-content">
+          <div class="dish-name">CRISPY SQUID</div>
+          <div class="dish-translations">바삭한 오징어 / Mực Chiên Giòn / 香脆鱿鱼 / Хрустящий кальмар</div>
+          <div class="price">160₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Tofu Fries"></div>
+        <div class="dish-content">
+          <div class="dish-name">TOFU FRIES</div>
+          <div class="dish-translations">두부 튀김 / Đậu Rán Chiên / 炸豆腐 / Жареный тофу</div>
+          <div class="price">70₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Pancake"></div>
+        <div class="dish-content">
+          <div class="dish-name">PANCAKE</div>
+          <div class="dish-translations">팬케이크 / Bánh Xèo / 薄煎饼 / Блинчик</div>
+          <div class="price">70₫</div>
+        </div>
+      </article>
+    </div>
   </div>
+</div>
 
-  <!-- SECTION 1: STARTERS -->
-  <section class="section" id="1-starters">
+<!-- PAGE 2: SALADS -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_002.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 2</div>
     <div class="section-header">
-      <h2 class="section-title-en">Starters</h2>
-      <div class="section-translations">스타터 / KHAI VỊ / 开胃菜 / ЗАКУСКИ</div>
+      <div class="section-title-en">Salads</div>
+      <div class="section-translations">샐러드 / Salad / 沙拉 / Салаты</div>
     </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-fish-banana-leaf.jpg" alt="Shrimp Salad"></div>
+        <div class="dish-content">
+          <div class="dish-name">SHRIMP SALAD</div>
+          <div class="dish-translations">새우 샐러드 / Salad Tôm / 鲜虾沙拉 / Салат с креветками</div>
+          <div class="price">100₫</div>
+        </div>
+      </article>
 
-    <!-- Each starter has unique photo -->
-    <article class="item">
-      <div class="item-photo"><img src="img/fresh-rice-paper-rolls.jpg" alt="Fresh Rice Paper Rolls"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">FRESH RICE PAPER ROLLS</h3>
-        <div class="item-translations">신선한 라이스 페이퍼 롤 / Gỏi Cuốn<br>新鲜米纸卷 / Роллы в рисовой бумаге</div>
-        <p class="item-price">70₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Mango & Shrimp Salad"></div>
+        <div class="dish-content">
+          <div class="dish-name">MANGO & SHRIMP SALAD</div>
+          <div class="dish-translations">망고와 새우 샐러드 / Xoài và Tôm / 芒果虾沙拉 / Салат с манго и креветками</div>
+          <div class="price">110₫</div>
+        </div>
+      </article>
 
-    <article class="item">
-      <div class="item-photo"><img src="img/fresh-rice-paper-rolls-shrimp.jpg" alt="Fresh Rice Paper Rolls with Shrimp"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">FRESH RICE PAPER ROLLS WITH SHRIMP</h3>
-        <div class="item-translations">새우를 곁들인 신선한 라이스 페이퍼 롤 / Gỏi Cuốn Tôm<br>鲜虾米纸卷 / Роллы с креветками</div>
-        <p class="item-price">75₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Avocado Salad"></div>
+        <div class="dish-content">
+          <div class="dish-name">AVOCADO SALAD</div>
+          <div class="dish-translations">아보카도 샐러드 / Salad Bơ / 牛油果沙拉 / Салат с авокадо</div>
+          <div class="price">90₫</div>
+        </div>
+      </article>
 
-    <!-- ... repeat for other starters with unique photos ... -->
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Beef Salad"></div>
+        <div class="dish-content">
+          <div class="dish-name">BEEF SALAD</div>
+          <div class="dish-translations">소고기 샐러드 / Salad Bò / 牛肉沙拉 / Салат с говядиной</div>
+          <div class="price">105₫</div>
+        </div>
+      </article>
 
-  </section>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Vegetarian Salad"></div>
+        <div class="dish-content">
+          <div class="dish-name">VEGETARIAN SALAD</div>
+          <div class="dish-translations">채식 샐러드 / Salad Rau Củ / 素食沙拉 / Овощной салат</div>
+          <div class="price">80₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
 
-  <!-- SECTION 4: BÁNH MÌ & LIGHT MEALS (GROUP PHOTO) -->
-  <section class="section" id="4-banh-mi--light-meals">
+<!-- PAGE 3: SOUPS -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_003.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 3</div>
     <div class="section-header">
-      <h2 class="section-title-en">Bánh Mì & Light Meals</h2>
-      <div class="section-translations">반미 & 라이트 밀 / BÁNH MÌ & MÓN NHẸ / 法棍 & 轻食 / БАГЕТЫ И ЛЕГКИЕ БЛЮДА</div>
+      <div class="section-title-en">Soups</div>
+      <div class="section-translations">수프 / Súp / 汤 / Супы</div>
     </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Seafood Soup"></div>
+        <div class="dish-content">
+          <div class="dish-name">SEAFOOD SOUP</div>
+          <div class="dish-translations">해물 수프 / Súp Hải Sản / 海鲜汤 / Суп с морепродуктами</div>
+          <div class="price">100₫</div>
+        </div>
+      </article>
 
-    <!-- All use SAME photo: banh-mi-group.jpg -->
-    <article class="item">
-      <div class="item-photo"><img src="img/banh-mi-group.jpg" alt="Bánh Mì assortment"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">PORK BÁNH MÌ</h3>
-        <div class="item-translations">돼지고기 반미 / Bánh Mì Thịt Lợn<br>猪肉法棍 / Багет со свининой</div>
-        <p class="item-price">30₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Pumpkin Soup"></div>
+        <div class="dish-content">
+          <div class="dish-name">PUMPKIN SOUP</div>
+          <div class="dish-translations">호박 수프 / Súp Bí Ngô / 南瓜汤 / Тыквенный суп</div>
+          <div class="price">70₫</div>
+        </div>
+      </article>
 
-    <article class="item">
-      <div class="item-photo"><img src="img/banh-mi-group.jpg" alt="Bánh Mì assortment"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">CHICKEN BÁNH MÌ</h3>
-        <div class="item-translations">닭고기 반미 / Bánh Mì Thịt Gà<br>鸡肉法棍 / Багет с курицей</div>
-        <p class="item-price">30₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-fish-banana-leaf.jpg" alt="Beef Soup / Phở Bo"></div>
+        <div class="dish-content">
+          <div class="dish-name">BEEF SOUP / PHỞ BO</div>
+          <div class="dish-translations">소고기 수프 / Phở Bò / 牛肉河粉 / Суп Фо с говядиной</div>
+          <div class="price">90₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
 
-    <!-- ... same photo for Seafood Bread and Egg Bánh Mì ... -->
-
-  </section>
-
-  <!-- SECTION 7: RICE & NOODLES -->
-  <section class="section" id="7-rice--noodles">
+<!-- PAGE 4: BÁNH MÌ & LIGHT MEALS -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_004.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 4</div>
     <div class="section-header">
-      <h2 class="section-title-en">Rice & Noodles</h2>
-      <div class="section-translations">라이스 & 누들 / CƠM & MÌ / 米饭 & 面条 / РИС И ЛАПША</div>
+      <div class="section-title-en">Bánh Mì & Light Meals</div>
+      <div class="section-translations">반미 & 라이트 밀 / Bánh Mì & Món Nhẹ / 法棍 & 轻食 / Багеты И Лёгкие Блюда</div>
     </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Pork Bánh Mì"></div>
+        <div class="dish-content">
+          <div class="dish-name">PORK BÁNH MÌ</div>
+          <div class="dish-translations">돼지고기 반미 / Bánh Mì Thịt Lợn / 猪肉法棍 / Багет со свининой</div>
+          <div class="price">30₫</div>
+        </div>
+      </article>
 
-    <!-- FRIED RICE GROUP (1 photo) -->
-    <article class="item">
-      <div class="item-photo"><img src="img/fried-rice-group.jpg" alt="Fried Rice assortment"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">FRIED RICE WITH SEAFOOD</h3>
-        <div class="item-translations">해산물 볶음밥 / Cơm Chiên Hải Sản<br>海鲜炒饭 / Рис с морепродуктами</div>
-        <p class="item-price">115₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls-shrimp.jpg" alt="Chicken Bánh Mì"></div>
+        <div class="dish-content">
+          <div class="dish-name">CHICKEN BÁNH MÌ</div>
+          <div class="dish-translations">닭고기 반미 / Bánh Mì Thịt Gà / 鸡肉法棍 / Багет с курицей</div>
+          <div class="price">30₫</div>
+        </div>
+      </article>
 
-    <article class="item">
-      <div class="item-photo"><img src="img/fried-rice-group.jpg" alt="Fried Rice assortment"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">FRIED RICE WITH BEEF</h3>
-        <div class="item-translations">쇠고기 볶음밥 / Cơm Chiên Bò<br>牛肉炒饭 / Рис с говядиной</div>
-        <p class="item-price">80₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Seafood Bread"></div>
+        <div class="dish-content">
+          <div class="dish-name">SEAFOOD BREAD</div>
+          <div class="dish-translations">해산물 빵 / Bánh Mì Hải Sản / 海鲜面包 / Багет с морепродуктами</div>
+          <div class="price">45₫</div>
+        </div>
+      </article>
 
-    <!-- ... repeat for other fried rice items ... -->
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Egg Bánh Mì"></div>
+        <div class="dish-content">
+          <div class="dish-name">EGG BÁNH MÌ</div>
+          <div class="dish-translations">계란 반미 / Bánh Mì Trứng Gà / 鸡蛋法棍 / Багет с яйцом</div>
+          <div class="price">30₫</div>
+        </div>
+      </article>
 
-    <!-- NOODLES GROUP (1 photo) -->
-    <article class="item">
-      <div class="item-photo"><img src="img/noodles-group.jpg" alt="Noodles stir-fry"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">NOODLES WITH SEAFOOD AND VEGETABLES</h3>
-        <div class="item-translations">해산물과 야채를 곁들인 국수 / Mì Xào Hải Sản<br>海鲜蔬菜面 / Лапша с морепродуктами</div>
-        <p class="item-price">115₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Cao Lầu"></div>
+        <div class="dish-content">
+          <div class="dish-name">CAO LẦU — NOODLE & PORK</div>
+          <div class="dish-translations">국수와 돼지고기 / Cao Lầu / 高楼面 / Као Лау (лапша со свининой)</div>
+          <div class="price">55₫</div>
+        </div>
+      </article>
 
-    <!-- ... repeat for other noodle items with same photo ... -->
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Steamed Rice"></div>
+        <div class="dish-content">
+          <div class="dish-name">STEAMED RICE</div>
+          <div class="dish-translations">찐 쌀 / Cơm Trắng / 白米饭 / Рис отварной</div>
+          <div class="price">15₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
 
-  </section>
-
-  <!-- SECTION 5: SIGNATURE MAINS -->
-  <section class="section" id="5-signature-mains">
+<!-- PAGE 5: SIGNATURE MAINS PART 1 -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_005.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 5</div>
     <div class="section-header">
-      <h2 class="section-title-en">Signature Mains ⭐</h2>
-      <div class="section-translations">시그니처 메인 / MÓN CHÍNH ĐẶC BIỆT / 招牌主菜 / ОСНОВНЫЕ БЛЮДА</div>
+      <div class="section-title-en">Signature Mains Part 1 ⭐</div>
+      <div class="section-translations">시그니처 메인 / Món Chính Đặc Biệt / 招牌主菜 / Основные Блюда</div>
     </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-fish-banana-leaf.jpg" alt="Chicken with Ginger"></div>
+        <div class="dish-content">
+          <div class="dish-name">CHICKEN WITH GINGER</div>
+          <div class="dish-translations">생강을 곁들인 닭고기 / Gà Kho Gừng / 姜汁鸡 / Курица с имбирем</div>
+          <div class="price">85₫</div>
+        </div>
+      </article>
 
-    <!-- Example: Grilled Fish in Banana Leaves (unique photo) -->
-    <article class="item">
-      <div class="item-photo"><img src="img/grilled-fish-banana-leaf.jpg" alt="Grilled Fish in Banana Leaves"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">GRILLED FISH IN BANANA LEAVES</h3>
-        <div class="item-translations">바나나 잎을 곁들인 생선 구이 / Cá Nướng Lá Chuối<br>香蕉叶烤鱼 / Рыба гриль в банановых листьях</div>
-        <p class="item-price">185₫</p>
-        <span class="badge">⭐ Signature Dish</span>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Chicken Satay"></div>
+        <div class="dish-content">
+          <div class="dish-name">CHICKEN SATAY</div>
+          <div class="dish-translations">치킨 사테이 / Gà Sa Tế / 沙爹鸡 / Курица сатай</div>
+          <div class="price">85₫</div>
+        </div>
+      </article>
 
-    <!-- Curry Chicken group -->
-    <article class="item">
-      <div class="item-photo"><img src="img/curry-chicken-group.jpg" alt="Curry dishes (chicken/pork/tofu)"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">CURRY CHICKEN</h3>
-        <div class="item-translations">카레 치킨 / Cà Ri Gà<br>咖喱鸡 / Курица карри</div>
-        <p class="item-price">85₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Curry Chicken"></div>
+        <div class="dish-content">
+          <div class="dish-name">CURRY CHICKEN</div>
+          <div class="dish-translations">카레 치킨 / Cà Ri Gà / 咖喱鸡 / Курица карри</div>
+          <div class="price">85₫</div>
+        </div>
+      </article>
 
-    <!-- ... Curry Pork and Curry Tofu use same curry-chicken-group.jpg ... -->
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Wonton (Pork Fried)"></div>
+        <div class="dish-content">
+          <div class="dish-name">WONTON (PORK FRIED)</div>
+          <div class="dish-translations">완탕 돼지고기 튀김 / Hoành Thánh Thịt / 炸猪肉馄饨 / Вонтоны со свининой</div>
+          <div class="price">95₫</div>
+        </div>
+      </article>
 
-    <!-- Curry Seafood uses different photo -->
-    <article class="item">
-      <div class="item-photo"><img src="img/curry-seafood.jpg" alt="Curry Seafood"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">CURRY SEAFOOD</h3>
-        <div class="item-translations">카레 해산물 / Cà Ri Hải Sản<br>咖喱海鲜 / Морепродукты карри</div>
-        <p class="item-price">105₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Curry Pork"></div>
+        <div class="dish-content">
+          <div class="dish-name">CURRY PORK</div>
+          <div class="dish-translations">카레 돼지고기 / Cà Ri Heo / 咖喱猪肉 / Свинина карри</div>
+          <div class="price">85₫</div>
+        </div>
+      </article>
 
-    <p class="note">All curry dishes served with rice or bread<br>
-      모든 카레 요리는 밥 또는 빵과 함께 제공됩니다 / Tất cả cà ri phục vụ với cơm hoặc bánh mì<br>
-      所有咖喱配米饭或面包 / Все карри подаются с рисом или хлебом</p>
-  </section>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-fish-banana-leaf.jpg" alt="Grilled Fish in Banana Leaves"></div>
+        <div class="dish-content">
+          <div class="dish-name">GRILLED FISH IN BANANA LEAVES</div>
+          <div class="dish-translations">바나나 잎을 곁들인 생선 구이 / Cá Nướng Lá Chuối / 香蕉叶烤鱼 / Рыба гриль в банановых листьях</div>
+          <div class="price">185₫</div>
+        </div>
+      </article>
 
-  <!-- SECTION 6: PLANT-BASED -->
-  <section class="section" id="6-plant-based">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Fried Fish with Tomato"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRIED FISH WITH TOMATO, GARLIC & ONION</div>
+          <div class="dish-translations">토마토, 마늘, 양파를 곁들인 생선 튀김 / Cá Kho Cà Chua / 番茄蒜香煎鱼 / Рыба с томатами и чесноком</div>
+          <div class="price">125₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Grilled Fish Fillet"></div>
+        <div class="dish-content">
+          <div class="dish-name">GRILLED FISH FILLET (WHITE)</div>
+          <div class="dish-translations">흰살 생선 필레 구이 / Cá Nướng Phi Lê Trắng / 烤白鱼柳 / Филе белой рыбы гриль</div>
+          <div class="price">125₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 6: SIGNATURE MAINS PART 2 -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_006.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 6</div>
     <div class="section-header">
-      <h2 class="section-title-en">Plant-Based 🌱</h2>
-      <div class="section-translations">플랜트 베이스 / MÓN CHAY / 素食 / ВЕГЕТАРИАНСКОЕ</div>
+      <div class="section-title-en">Signature Mains Part 2 ⭐</div>
+      <div class="section-translations">시그니처 메인 / Món Chính Đặc Biệt / 招牌主菜 / Основные Блюда</div>
     </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Grilled Squid"></div>
+        <div class="dish-content">
+          <div class="dish-name">GRILLED SQUID WITH GARLIC, CHILLI & PEPPER</div>
+          <div class="dish-translations">마늘, 고추, 후추를 곁들인 오징어 구이 / Mực Nướng Tỏi Ớt / 蒜香辣椒烤鱿鱼 / Кальмар гриль с чесноком</div>
+          <div class="price">150₫</div>
+        </div>
+      </article>
 
-    <!-- Crispy Tofu -->
-    <article class="item">
-      <div class="item-photo"><img src="img/tofu-crispy.jpg" alt="Crispy Tofu"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">CRISPY TOFU</h3>
-        <div class="item-translations">바삭한 두부 / Đậu Khuôn Xủ<br>香脆豆腐 / Хрустящий тофу</div>
-        <p class="item-price">70₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Grilled Shrimp"></div>
+        <div class="dish-content">
+          <div class="dish-name">GRILLED SHRIMP WITH LEMONGRASS & GARLIC</div>
+          <div class="dish-translations">레몬그라스와 마늘을 곁들인 구운 새우 / Tôm Nướng Sả Tỏi / 香茅蒜香烤虾 / Креветки гриль с лемонграссом</div>
+          <div class="price">160₫</div>
+        </div>
+      </article>
 
-    <!-- Tofu with sauces (same photo for both) -->
-    <article class="item">
-      <div class="item-photo"><img src="img/tofu-sauce.jpg" alt="Tofu in sauce"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">TOFU WITH TAMARIND SAUCE</h3>
-        <div class="item-translations">타마린드 소스를 곁들인 두부 / Đậu Khuôn Me<br>罗望子豆腐 / Тофу с тамариндом</div>
-        <p class="item-price">65₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls-shrimp.jpg" alt="Fried Shrimp with Tamarind"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRIED SHRIMP WITH TAMARIND</div>
+          <div class="dish-translations">타마린드를 곁들인 새우튀김 / Tôm Rang Me / 罗望子炸虾 / Креветки с тамариндом</div>
+          <div class="price">160₫</div>
+        </div>
+      </article>
 
-    <article class="item">
-      <div class="item-photo"><img src="img/tofu-sauce.jpg" alt="Tofu in sauce"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">TOFU WITH TOMATO & ONION SAUCE</h3>
-        <div class="item-translations">토마토와 양파 소스를 곁들인 두부 / Đậu Khuôn Cà Chua<br>番茄洋葱豆腐 / Тофу с томатами</div>
-        <p class="item-price">65₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-fish-banana-leaf.jpg" alt="Wonton (Seafood Fried)"></div>
+        <div class="dish-content">
+          <div class="dish-name">WONTON (SEAFOOD FRIED)</div>
+          <div class="dish-translations">완탕 해물 튀김 / Hoành Thánh Hải Sản / 炸海鲜馄饨 / Вонтоны с морепродуктами</div>
+          <div class="price">115₫</div>
+        </div>
+      </article>
 
-    <!-- Vegetables group -->
-    <article class="item">
-      <div class="item-photo"><img src="img/vegetables-stir-fry.jpg" alt="Stir-fried vegetables"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">STIR FRIED MIX VEGETABLES</h3>
-        <div class="item-translations">믹스 야채 볶음 / Rau Xào<br>炒什锦蔬菜 / Овощи жареные</div>
-        <p class="item-price">65₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Fried Crab"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRIED CRAB (WHOLE) WITH TAMARIND</div>
+          <div class="dish-translations">타마린드를 곁들인 튀긴 게 / Cua Rang Me / 罗望子炸蟹 / Краб жареный с тамариндом</div>
+          <div class="price">250₫</div>
+        </div>
+      </article>
 
-    <!-- ... other veg dishes use same photo ... -->
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Grilled Beef"></div>
+        <div class="dish-content">
+          <div class="dish-name">GRILLED BEEF WITH LEMONGRASS</div>
+          <div class="dish-translations">레몬그라스를 곁들인 구운 쇠고기 / Bò Nướng Sả / 香茅烤牛肉 / Говядина гриль с лемонграссом</div>
+          <div class="price">120₫</div>
+        </div>
+      </article>
 
-  </section>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Curry Seafood"></div>
+        <div class="dish-content">
+          <div class="dish-name">CURRY SEAFOOD</div>
+          <div class="dish-translations">카레 해산물 / Cà Ri Hải Sản / 咖喱海鲜 / Морепродукты карри</div>
+          <div class="price">105₫</div>
+        </div>
+      </article>
 
-  <!-- SECTION 8: DESSERTS -->
-  <section class="section" id="8-desserts">
+      <p style="font-size: 6pt; color: #7F8C8D; text-align: center; margin-top: 5px; font-style: italic;">Note: All curry dishes served with rice or bread</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 7: PLANT-BASED -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_007.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 7</div>
     <div class="section-header">
-      <h2 class="section-title-en">Desserts</h2>
-      <div class="section-translations">디저트 / MÓN TRÁNG MIỆNG / 甜点 / ДЕСЕРТЫ</div>
+      <div class="section-title-en">Plant-Based 🌱</div>
+      <div class="section-translations">플랜트 베이스 / Món Chay / 素食 / Вегетарианское</div>
     </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Crispy Tofu"></div>
+        <div class="dish-content">
+          <div class="dish-name">CRISPY TOFU</div>
+          <div class="dish-translations">바삭한 두부 / Đậu Khuôn Xủ / 香脆豆腐 / Хрустящий тофу</div>
+          <div class="price">70₫</div>
+        </div>
+      </article>
 
-    <article class="item">
-      <div class="item-photo"><img src="img/pancakes-assortment.jpg" alt="Pancakes (banana, mango, chocolate)"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">BANANA PANCAKE</h3>
-        <div class="item-translations">바나나 팬케이크 / Bánh Kép Chuối<br>香蕉煎饼 / Блинчик с бананом</div>
-        <p class="item-price">55₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Tofu with Tamarind Sauce"></div>
+        <div class="dish-content">
+          <div class="dish-name">TOFU WITH TAMARIND SAUCE</div>
+          <div class="dish-translations">타마린드 소스를 곁들인 두부 / Đậu Khuôn Me / 罗望子豆腐 / Тофу с тамариндом</div>
+          <div class="price">65₫</div>
+        </div>
+      </article>
 
-    <!-- ... Mango & Chocolate Pancake use same photo ... -->
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-fish-banana-leaf.jpg" alt="Tofu with Tomato Sauce"></div>
+        <div class="dish-content">
+          <div class="dish-name">TOFU WITH TOMATO & ONION SAUCE</div>
+          <div class="dish-translations">토마토와 양파 소스를 곁들인 두부 / Đậu Khuôn Cà Chua / 番茄洋葱豆腐 / Тофу с томатами</div>
+          <div class="price">65₫</div>
+        </div>
+      </article>
 
-  </section>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Curry Tofu"></div>
+        <div class="dish-content">
+          <div class="dish-name">CURRY TOFU WITH SEAWEED</div>
+          <div class="dish-translations">해초를 넣은 카레 두부 / Cà Ri Đậu Hũ Rong Biển / 海带咖喱豆腐 / Тофу карри с водорослями</div>
+          <div class="price">85₫</div>
+        </div>
+      </article>
 
-  <!-- SECTION 9: COFFEE -->
-  <section class="section" id="9-coffee">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Stir Fried Vegetables"></div>
+        <div class="dish-content">
+          <div class="dish-name">STIR FRIED MIX VEGETABLES</div>
+          <div class="dish-translations">믹스 야채 볶음 / Rau Xào / 炒什锦蔬菜 / Овощи жареные</div>
+          <div class="price">65₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Eggplant with Coconut Cream"></div>
+        <div class="dish-content">
+          <div class="dish-name">EGGPLANT WITH COCONUT CREAM</div>
+          <div class="dish-translations">코코넛 크림을 곁들인 가지 / Cà Tím Dừa / 椰奶茄子 / Баклажан в кокосовом молоке</div>
+          <div class="price">60₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Pumpkin with Coconut Cream"></div>
+        <div class="dish-content">
+          <div class="dish-name">PUMPKIN WITH COCONUT CREAM</div>
+          <div class="dish-translations">코코넛 크림을 곁들인 호박 / Bí Dừa / 椰奶南瓜 / Тыква в кокосовом молоке</div>
+          <div class="price">65₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-fish-banana-leaf.jpg" alt="Stir Morning Glory"></div>
+        <div class="dish-content">
+          <div class="dish-name">STIR MORNING GLORY</div>
+          <div class="dish-translations">모닝글로리 볶음 / Rau Muống Xào / 炒空心菜 / Водяной шпинат жареный</div>
+          <div class="price">55₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 8: RICE & NOODLES PART 1 -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_008.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 8</div>
     <div class="section-header">
-      <h2 class="section-title-en">Coffee</h2>
-      <div class="section-translations">커피 / CÀ PHÊ / 咖啡 / КОФЕ</div>
+      <div class="section-title-en">Rice & Noodles Part 1</div>
+      <div class="section-translations">라이스 & 누들 / Cơm & Mì / 米饭 & 面条 / Рис И Лапша</div>
     </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Fried Rice with Seafood"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRIED RICE WITH SEAFOOD</div>
+          <div class="dish-translations">해산물 볶음밥 / Cơm Chiên Hải Sản / 海鲜炒饭 / Рис с морепродуктами</div>
+          <div class="price">115₫</div>
+        </div>
+      </article>
 
-    <!-- Group 1: Vietnamese Coffee -->
-    <article class="item">
-      <div class="item-photo"><img src="img/vietnamese-coffee.jpg" alt="Vietnamese coffee (black & milk)"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">VIETNAMESE COFFEE (BLACK) HOT / COLD</h3>
-        <div class="item-translations">베트남 블랙 커피 (핫/콜드) / Cà Phê Đen (Nóng/Lạnh)<br>越南黑咖啡（热/冰）/ Вьетнамский кофе черный</div>
-        <p class="item-price">30₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Fried Rice with Beef"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRIED RICE WITH BEEF</div>
+          <div class="dish-translations">쇠고기 볶음밥 / Cơm Chiên Bò / 牛肉炒饭 / Рис с говядиной</div>
+          <div class="price">80₫</div>
+        </div>
+      </article>
 
-    <!-- Group 2: Specialty Coffee -->
-    <article class="item">
-      <div class="item-photo"><img src="img/specialty-coffee.jpg" alt="Specialty coffee (cappuccino, coconut, salt)"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">CAPPUCCINO</h3>
-        <div class="item-translations">카푸치노 / Cappuccino<br>卡布奇诺 / Капучино</div>
-        <p class="item-price">45₫</p>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Fried Rice with Chicken"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRIED RICE WITH CHICKEN</div>
+          <div class="dish-translations">닭고기 볶음밥 / Cơm Chiên Gà / 鸡肉炒饭 / Рис с курицей</div>
+          <div class="price">70₫</div>
+        </div>
+      </article>
 
-    <article class="item">
-      <div class="item-photo"><img src="img/specialty-coffee.jpg" alt="Specialty coffee (cappuccino, coconut, salt)"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">COCONUT COFFEE</h3>
-        <div class="item-translations">코코넛 커피 / Cà Phê Dừa<br>椰子咖啡 / Кофе кокосовый</div>
-        <p class="item-price">45₫</p>
-        <span class="badge">📸 Instagram Favorite</span>
-      </div>
-    </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Fried Rice with Shrimp"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRIED RICE WITH SHRIMP</div>
+          <div class="dish-translations">새우 볶음밥 / Cơm Chiên Tôm / 虾仁炒饭 / Рис с креветками</div>
+          <div class="price">80₫</div>
+        </div>
+      </article>
 
-    <article class="item">
-      <div class="item-photo"><img src="img/specialty-coffee.jpg" alt="Specialty coffee (cappuccino, coconut, salt)"></div>
-      <div class="item-content">
-        <h3 class="item-name-en">COFFEE SALT</h3>
-        <div class="item-translations">커피 솔트 / Cà Phê Muối<br>盐咖啡 / Кофе соленый</div>
-        <p class="item-price">40₫</p>
-        <span class="badge">⭐ Local Specialty</span>
-      </div>
-    </article>
-  </section>
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Fried Rice with Vegetables"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRIED RICE WITH VEGETABLES</div>
+          <div class="dish-translations">야채 볶음밥 / Cơm Chiên Rau Củ / 素炒饭 / Рис с овощами</div>
+          <div class="price">60₫</div>
+        </div>
+      </article>
 
-  <!-- Add other sections similarly: Salads, Soups, Juices, Drinks... -->
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Fried Rice Tofu and Veg"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRIED RICE TOFU AND VEG</div>
+          <div class="dish-translations">두부와 야채 볶음밥 / Cơm Chiên Đậu Rau / 豆腐蔬菜炒饭 / Рис с тофу и овощами</div>
+          <div class="price">65₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 9: RICE & NOODLES PART 2 -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_009.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 9</div>
+    <div class="section-header">
+      <div class="section-title-en">Rice & Noodles Part 2</div>
+      <div class="section-translations">라이스 & 누들 / Cơm & Mì / 米饭 & 面条 / Рис И Лапша</div>
+    </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Noodles with Seafood"></div>
+        <div class="dish-content">
+          <div class="dish-name">NOODLES WITH SEAFOOD AND VEGETABLES</div>
+          <div class="dish-translations">해산물과 야채를 곁들인 국수 / Mì Xào Hải Sản / 海鲜蔬菜面 / Лапша с морепродуктами</div>
+          <div class="price">115₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Noodles with Beef"></div>
+        <div class="dish-content">
+          <div class="dish-name">NOODLES WITH BEEF AND VEGETABLES</div>
+          <div class="dish-translations">쇠고기와 야채를 곁들인 국수 / Mì Xào Bò / 牛肉蔬菜面 / Лапша с говядиной</div>
+          <div class="price">80₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Noodles with Chicken"></div>
+        <div class="dish-content">
+          <div class="dish-name">NOODLES WITH CHICKEN AND VEGETABLES</div>
+          <div class="dish-translations">닭고기와 야채를 곁들인 국수 / Mì Xào Gà / 鸡肉蔬菜面 / Лапша с курицей</div>
+          <div class="price">70₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Noodles with Shrimp"></div>
+        <div class="dish-content">
+          <div class="dish-name">NOODLES WITH SHRIMP AND VEGETABLES</div>
+          <div class="dish-translations">새우와 야채를 곁들인 국수 / Mì Xào Tôm / 虾仁蔬菜面 / Лапша с креветками</div>
+          <div class="price">80₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Noodles with Tofu"></div>
+        <div class="dish-content">
+          <div class="dish-name">NOODLES WITH TOFU AND VEGETABLES</div>
+          <div class="dish-translations">두부와 야채를 곁들인 국수 / Mì Xào Chay / 豆腐蔬菜面 / Лапша с тофу</div>
+          <div class="price">70₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-fish-banana-leaf.jpg" alt="Noodles with Egg"></div>
+        <div class="dish-content">
+          <div class="dish-name">NOODLES WITH EGG AND VEGETABLES</div>
+          <div class="dish-translations">계란과 야채를 곁들인 국수 / Mì Xào Trứng / 鸡蛋蔬菜面 / Лапша с яйцом</div>
+          <div class="price">60₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 10: DESSERTS -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_010.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 10</div>
+    <div class="section-header">
+      <div class="section-title-en">Desserts</div>
+      <div class="section-translations">디저트 / Món Tráng Miệng / 甜点 / Десерты</div>
+    </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Banana Pancake"></div>
+        <div class="dish-content">
+          <div class="dish-name">BANANA PANCAKE</div>
+          <div class="dish-translations">바나나 팬케이크 / Bánh Kép Chuối / 香蕉煎饼 / Блинчик с бананом</div>
+          <div class="price">55₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Mango Pancake"></div>
+        <div class="dish-content">
+          <div class="dish-name">MANGO PANCAKE</div>
+          <div class="dish-translations">망고 팬케이크 / Bánh Kép Xoài / 芒果煎饼 / Блинчик с манго</div>
+          <div class="price">55₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Chocolate Pancake"></div>
+        <div class="dish-content">
+          <div class="dish-name">CHOCOLATE PANCAKE</div>
+          <div class="dish-translations">초콜릿 팬케이크 / Bánh Kép Socola / 巧克力煎饼 / Шоколадный блинчик</div>
+          <div class="price">55₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Fruit Salad"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRUIT SALAD</div>
+          <div class="dish-translations">과일 샐러드 / Salad Trái Cây / 水果沙拉 / Фруктовый салат</div>
+          <div class="price">55₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 11: COFFEE -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_011.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 11</div>
+    <div class="section-header">
+      <div class="section-title-en">Coffee</div>
+      <div class="section-translations">커피 / Cà Phê / 咖啡 / Кофе</div>
+    </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Vietnamese Coffee (Black)"></div>
+        <div class="dish-content">
+          <div class="dish-name">VIETNAMESE COFFEE (BLACK) HOT / COLD</div>
+          <div class="dish-translations">베트남 블랙 커피 (핫/콜드) / Cà Phê Đen (Nóng/Lạnh) / 越南黑咖啡（热/冰） / Вьетнамский кофе черный</div>
+          <div class="price">30₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Coffee Milk"></div>
+        <div class="dish-content">
+          <div class="dish-name">COFFEE MILK HOT / COLD</div>
+          <div class="dish-translations">커피 밀크 (핫/콜드) / Cà Phê Sữa (Nóng/Lạnh) / 牛奶咖啡（热/冰） / Кофе с молоком</div>
+          <div class="price">30₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Cappuccino"></div>
+        <div class="dish-content">
+          <div class="dish-name">CAPPUCCINO</div>
+          <div class="dish-translations">카푸치노 / Cappuccino / 卡布奇诺 / Капучино</div>
+          <div class="price">45₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Coconut Coffee"></div>
+        <div class="dish-content">
+          <div class="dish-name">COCONUT COFFEE</div>
+          <div class="dish-translations">코코넛 커피 / Cà Phê Dừa / 椰子咖啡 / Кофе кокосовый</div>
+          <div class="price">45₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Coffee Salt"></div>
+        <div class="dish-content">
+          <div class="dish-name">COFFEE SALT</div>
+          <div class="dish-translations">커피 솔트 / Cà Phê Muối / 盐咖啡 / Кофе соленый</div>
+          <div class="price">40₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 12: FRESH JUICES & SMOOTHIES -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_012.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 12</div>
+    <div class="section-header">
+      <div class="section-title-en">Fresh Juices & Smoothies</div>
+      <div class="section-translations">주스 & 스무디 / Nước Ép & Sinh Tố / 果汁 & 果昔 / Соки И Смузи</div>
+    </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Mango"></div>
+        <div class="dish-content">
+          <div class="dish-name">MANGO</div>
+          <div class="dish-translations">망고 / Xoài / 芒果 / Манго</div>
+          <div class="price">40₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Pineapple"></div>
+        <div class="dish-content">
+          <div class="dish-name">PINEAPPLE</div>
+          <div class="dish-translations">파인애플 / Thơm / 菠萝 / Ананас</div>
+          <div class="price">40₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Watermelon"></div>
+        <div class="dish-content">
+          <div class="dish-name">WATERMELON</div>
+          <div class="dish-translations">수박 / Dưa Hấu / 西瓜 / Арбуз</div>
+          <div class="price">40₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Passion Fruit"></div>
+        <div class="dish-content">
+          <div class="dish-name">PASSION FRUIT</div>
+          <div class="dish-translations">패션프루트 / Chanh Dây / 百香果 / Маракуйя</div>
+          <div class="price">40₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Avocado"></div>
+        <div class="dish-content">
+          <div class="dish-name">AVOCADO</div>
+          <div class="dish-translations">아보카도 / Bơ / 牛油果 / Авокадо</div>
+          <div class="price">40₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Orange"></div>
+        <div class="dish-content">
+          <div class="dish-name">ORANGE</div>
+          <div class="dish-translations">오렌지 / Cam / 橙子 / Апельсин</div>
+          <div class="price">40₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Fresh Coconut"></div>
+        <div class="dish-content">
+          <div class="dish-name">FRESH COCONUT</div>
+          <div class="dish-translations">신선한 코코넛 / Dừa Tươi / 新鲜椰子 / Кокос</div>
+          <div class="price">45₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Mixed Smoothie"></div>
+        <div class="dish-content">
+          <div class="dish-name">MIXED SMOOTHIE</div>
+          <div class="dish-translations">혼합 스무디 / Sinh Tố Hợn Hợp / 混合果昔 / Смузи</div>
+          <div class="price">45₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 13: DRINKS PART 1 -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_013.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 13</div>
+    <div class="section-header">
+      <div class="section-title-en">Drinks Part 1</div>
+      <div class="section-translations">음료 / Đồ Uống / 饮料 / Напитки</div>
+    </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Local Beer"></div>
+        <div class="dish-content">
+          <div class="dish-name">LOCAL BEER (LARUE / SAIGON / HUDA)</div>
+          <div class="dish-translations">로컬 비어 / Bia địa phương / 本地啤酒 / Местное пиво</div>
+          <div class="price">25₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Tiger Beer"></div>
+        <div class="dish-content">
+          <div class="dish-name">TIGER BEER</div>
+          <div class="dish-translations">타이거 비어 / Bia Tiger / 老虎啤酒 / Тайгер</div>
+          <div class="price">35₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Dalat Red Wine"></div>
+        <div class="dish-content">
+          <div class="dish-name">DALAT RED WINE <span style="font-size: 5pt;">*Glass 50₫ / Bottle 190₫*</span></div>
+          <div class="dish-translations">달랏 레드 와인 / Rượu Vang Đỏ Đà Lạt / 大叻红葡萄酒 / Красное вино Далат</div>
+          <div class="price">50₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Dalat White Wine"></div>
+        <div class="dish-content">
+          <div class="dish-name">DALAT WHITE WINE <span style="font-size: 5pt;">*Glass 50₫ / Bottle 190₫*</span></div>
+          <div class="dish-translations">달랏 화이트 와인 / Rượu Vang Trắng Đà Lạt / 大叻白葡萄酒 / Белое вино Далат</div>
+          <div class="price">50₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Mojito"></div>
+        <div class="dish-content">
+          <div class="dish-name">MOJITO</div>
+          <div class="dish-translations">모히또 / Mojito / 莫吉托 / Мохито</div>
+          <div class="price">70₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Margarita"></div>
+        <div class="dish-content">
+          <div class="dish-name">MARGARITA</div>
+          <div class="dish-translations">마가리타 / Margarita / 玛格丽塔 / Маргарита</div>
+          <div class="price">90₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 14: DRINKS PART 2 -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_014.webp');">
+  <div class="content">
+    <div class="page-number">PAGE 14</div>
+    <div class="section-header">
+      <div class="section-title-en">Drinks Part 2</div>
+      <div class="section-translations">음료 / Đồ Uống / 饮料 / Напитки</div>
+    </div>
+    <div class="dishes-container">
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Pina Colada"></div>
+        <div class="dish-content">
+          <div class="dish-name">PINA COLADA</div>
+          <div class="dish-translations">피나 콜라다 / Pina Colada / 椰林飘香 / Пина колада</div>
+          <div class="price">80₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Gin Tonic"></div>
+        <div class="dish-content">
+          <div class="dish-name">GIN TONIC (HARPOON)</div>
+          <div class="dish-translations">진 토닉 / Gin Tonic / 金汤力 / Джин-тоник</div>
+          <div class="price">70₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/banana-pancake.jpg" alt="Ginger Tea"></div>
+        <div class="dish-content">
+          <div class="dish-name">GINGER TEA</div>
+          <div class="dish-translations">생강차 / Trà Gừng / 姜茶 / Имбирный чай</div>
+          <div class="price">30₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/tofu-crispy.jpg" alt="Green Tea with Lemon"></div>
+        <div class="dish-content">
+          <div class="dish-name">GREEN TEA WITH LEMON</div>
+          <div class="dish-translations">녹차와 레몬 / Trà Xanh Chanh / 柠檬绿茶 / Зеленый чай с лимоном</div>
+          <div class="price">30₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/fresh-rice-paper-rolls.jpg" alt="Soft Drinks"></div>
+        <div class="dish-content">
+          <div class="dish-name">SOFT DRINKS (COKE / DIET COKE / FANTA / 7UP)</div>
+          <div class="dish-translations">소프트 드링크 / Nước ngọt / 软饮料 / Газировка</div>
+          <div class="price">25₫</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-photo"><img src="img/dishes/grilled-squid-garlic.jpg" alt="Water"></div>
+        <div class="dish-content">
+          <div class="dish-name">WATER (SMALL / LARGE) <span style="font-size: 5pt;">*15₫ / 20₫*</span></div>
+          <div class="dish-translations">물 (소/대) / Nước (Nhỏ/Lớn) / 水（小/大） / Вода (малая/большая)</div>
+          <div class="price">15₫</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 15: EMPTY LAST PAGE -->
+<div class="page" style="background-image: url('img/The_Tamarind_Tree_last.webp');">
+</div>
 
 </body>
 </html>
